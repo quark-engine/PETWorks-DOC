@@ -11,3 +11,4 @@ PETWorks-framework Documentation
    :caption: Contents:
 
    ambiguity
+   precision
