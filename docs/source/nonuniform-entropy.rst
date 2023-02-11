@@ -10,7 +10,7 @@
 
 再來，我們透過 API ``report(result, format)``，以上述評估結果與 “json” 字串作爲參數，將評估結果以 JSON 格式印出。
 
-範例程式碼: Non-UniformEntropy.py
+範例程式碼: nonUniformEntropy.py
 ----------------------------------
 
 .. code-block:: python
@@ -31,7 +31,7 @@
 
 .. code-block:: bash
 
-    $ python Non-UniformEntropy.py
+    $ python nonUniformEntropy.py
     {
         "Non-Uniform Entropy": 0.6691909578638351
     }
