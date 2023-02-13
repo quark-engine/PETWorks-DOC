@@ -12,4 +12,4 @@ PETWorks-framework Documentation
 
    ambiguity
    precision
-   nonuniform-entropy
+   nonuniformentropy
