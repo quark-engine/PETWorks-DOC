@@ -32,7 +32,7 @@
 
 .. code-block:: text
 
-    $ python AECS.py
+    $ python aecs.py
     {
         "AECS": 0.9992930131052006
     }
