@@ -13,3 +13,4 @@ PETWorks-framework Documentation
    ambiguity
    precision
    nonuniformentropy
+   aecs
