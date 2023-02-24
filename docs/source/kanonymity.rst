@@ -4,9 +4,9 @@
 
 以下程式碼旨在評估資料是否滿足 k-匿名性（k-anonymity）。更多 k-匿名性之說明，詳見 `此處 <#id3>`_ 。
 
-我們以 ``data/adult_anonymized.csv`` 作爲欲評估之表格資料，以及 ``attributeTypes`` 作為屬性形態定義，展示如何透過 PETWorks-framework 框架判斷此指標。
+我們以 ``data/adult_anonymized.csv`` 作爲欲評估之表格資料，以及 ``attributeTypes`` 作為屬性型態定義，展示如何透過 PETWorks-framework 框架判斷此指標。
 
-在以下程式碼中，我們透過 API ``PETValidation(None, anonymized, tech, attributeTypes, k)`` ，以上述資料、“k-anonymity” 字串、屬性形態定義以及整數 k 作爲參數，判斷資料是否滿足 k-匿名性。其中，屬性形態定義將 "age" 與 "sex" 欄位設定爲個體背景資訊。
+在以下程式碼中，我們透過 API ``PETValidation(None, anonymized, tech, attributeTypes, k)`` ，以上述資料、“k-anonymity” 字串、屬性型態定義以及整數 k 作爲參數，判斷資料是否滿足 k-匿名性。其中，屬性型態定義將 "age" 與 "sex" 欄位設定爲個體背景資訊。
 
 再來，我們透過 API ``report(result, format)`` ，以上述評估結果與 “json” 字串作爲參數，將評估結果以 JSON 格式印出。
 
