@@ -14,3 +14,4 @@ PETWorks-framework Documentation
    precision
    nonuniformentropy
    aecs
+   kanonymity
