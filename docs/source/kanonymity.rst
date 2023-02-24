@@ -4,9 +4,9 @@
 
 以下程式碼旨在評估資料是否滿足 k-匿名性（k-anonymity）。更多 k-匿名性之說明，詳見 `此處 <#id3>`_ 。
 
-我們以 ``data/adult_anonymized.csv`` 作爲欲評估之表格資料，以及 ``attributeTypes`` 作為個體背景資訊之定義，展示如何透過 PETWorks-framework 框架判斷此指標。
+我們以 ``data/adult_anonymized.csv`` 作爲欲評估之表格資料，以及 ``attributeTypes`` 作為屬性形態定義，展示如何透過 PETWorks-framework 框架判斷此指標。
 
-在以下程式碼中，我們透過 API ``PETValidation(None, anonymized, tech, attributeTypes, k)`` ，以上述資料、“k-anonymity” 字串、個體背景資訊之定義、以及整數 k 作爲參數，判斷資料是否滿足 k-匿名性。
+在以下程式碼中，我們透過 API ``PETValidation(None, anonymized, tech, attributeTypes, k)`` ，以上述資料、“k-anonymity” 字串、屬性形態定義以及整數 k 作爲參數，判斷資料是否滿足 k-匿名性。其中屬性形態定義用於指定個體背景資訊之資料欄位，若不給定，則預設所有資料欄位皆為個體背景資訊。
 
 再來，我們透過 API ``report(result, format)`` ，以上述評估結果與 “json” 字串作爲參數，將評估結果以 JSON 格式印出。
 
@@ -46,7 +46,7 @@
 評估指標之定義
 --------------
 
-k-匿名性（k-anonymity）是一種指標，表示資料表中的任何一個資料列，其儲存之個體背景資訊皆與至少 :math:`k-1` 個資料列相同。其中，個體背景資訊爲可相互組合，識別出個體的敏感資訊，又稱準識別符（Quasi-identifier）。
+k-匿名性（k-anonymity）是一種指標，表示資料表中的任何一個資料列，其儲存之個體背景資訊皆與至少 :math:`k-1` 個資料列相同。其中，個體背景資訊爲可相互組合，識別出個體的隱私資訊，又稱準識別符（Quasi-identifier）。
 
 
 而 k 爲可調配之參數，數值介於 1 與無限大之間，數值越大，具相同個體背景資訊的資料列越多，識別出個體的難度越高。若 k 為 1，資料列可有唯一的個體背景資訊，識別出個體的難度最低。
