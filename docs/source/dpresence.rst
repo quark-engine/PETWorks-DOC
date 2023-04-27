@@ -10,7 +10,7 @@
 再來，我們透過 API ``report(result, format)``，以上述評估結果與 “json” 字串作爲參數，將評估結果以 JSON 格式印出。
 
 範例程式碼: d-presence.py
-=========================
+-------------------------
 
 .. code-block:: python
 
@@ -36,7 +36,7 @@
 
 
 輸出結果
-========
+--------
 
 .. code-block:: text
     
@@ -49,7 +49,7 @@
 
 
 評估指標之定義
-==============
+--------------
 
 :math:`\delta`-存在性（:math:`\delta`-presence）是一種隱私保護力指標，表示攻擊者利用個體的背景資訊，成功辨識個體存在於去識別化資料表的機率，是否介於指定數值範圍（:math:`\delta_{\min}` 到 :math:`\delta_{\max}` ）之間，該機率稱 :math:`\delta` 值。一旦攻擊者辨識出個體 存在 或 不存在 於去識別化資料表，可藉由去識別化資料表推敲出個體敏感資訊。
 
@@ -58,7 +58,7 @@
 因此，指標使用 :math:`\delta_{\min}` 與 :math:`\delta_{\max}` 兩可調配參數限制 :math:`\delta` 值數值範圍。當 :math:`\delta_{\min}` 越大、:math:`\delta_{\max}` 越小，:math:`\delta` 值越接近中間值，此時個體之敏感資訊獲得最大保障。
 
 評估指標之判斷
-==============
+---------------
 
 參考 [1]_ ，判斷 :math:`\delta`-存在性的方法有三個步驟：
 
@@ -167,7 +167,7 @@
 
 
 參考資料
-========
+---------
 
 .. [1] M. E. Nergiz, M. Atzori, and C. Clifton, “Hiding the presence of individuals from shared databases,” Proceedings of the 2007 ACM SIGMOD international conference on Management of data, 2007. 
 
