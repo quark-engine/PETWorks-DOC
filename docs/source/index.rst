@@ -15,3 +15,4 @@ PETWorks-framework Documentation
    nonuniformentropy
    aecs
    kanonymity
+   dpresence
