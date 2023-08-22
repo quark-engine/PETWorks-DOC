@@ -17,3 +17,4 @@ PETWorks-framework Documentation
    kanonymity
    dpresence
    ldiversity
+   tcloseness
