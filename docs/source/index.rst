@@ -18,3 +18,4 @@ PETWorks-framework Documentation
    dpresence
    ldiversity
    tcloseness
+   profitability
