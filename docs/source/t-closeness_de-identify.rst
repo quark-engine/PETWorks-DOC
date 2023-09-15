@@ -22,8 +22,8 @@ t-相似性去識別化
   dataHierarchy = "data/adult_hierarchy"
   
   attributeTypes = {
+      "sex": QUASI_IDENTIFIER,
       "age": QUASI_IDENTIFIER,
-      "race": QUASI_IDENTIFIER,
       "workclass": SENSITIVE_ATTRIBUTE,
   }
   
