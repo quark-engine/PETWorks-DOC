@@ -24,8 +24,8 @@
   subsetData = "data/adult10.csv"
   
   attributeTypes = {
+      "sex": QUASI_IDENTIFIER,
       "age": QUASI_IDENTIFIER,
-      "race": QUASI_IDENTIFIER,
       "workclass": SENSITIVE_ATTRIBUTE,
   }
   
