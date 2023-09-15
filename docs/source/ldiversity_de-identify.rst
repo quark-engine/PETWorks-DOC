@@ -23,8 +23,8 @@ l-多樣性去識別化
   dataHierarchy = "data/adult_hierarchy"
   
   attributeTypes = {
-      "age": QUASI_IDENTIFIER,
       "sex": QUASI_IDENTIFIER,
+      "age": QUASI_IDENTIFIER,
       "workclass": SENSITIVE_ATTRIBUTE,
   }
   
