@@ -111,7 +111,7 @@
 3. 依據步驟 2. 的組合進行去識別化，輸出去識別化結果。
 
 
-詳細請參閱 `此處 <https://hackmd.io/_m52ikVaS1GujvowVEmPFA>`_。
+詳細處理流程請參閱 ARX 官方提供之 `去識別化演算法說明文件 <https://arx.deidentifier.org/development/algorithms/>`_ 。
 
 
 
