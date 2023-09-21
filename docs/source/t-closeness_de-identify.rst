@@ -4,9 +4,9 @@ t-相似性去識別化
 
 以下程式碼旨在對資料進行去識別化以滿足 t-相似性（t-closeness）。更多 t-相似性之說明，詳見 `此處 <#t-相似性之定義>`_ 。
 
-我們以 ``data/adult.csv`` 作爲原始資料，``data/adult_hierarchy`` 目錄作爲資料欄位定義，以及 ``attributeTypes`` 作為屬性型態定義，展示如何透過 PETWorks-framework 框架進行去識別化。
+我們以 ``data/adult.csv`` 作爲原始資料，``data/adult_hierarchy`` 目錄作爲資料階層定義，以及 ``attributeTypes`` 作為屬性型態定義，展示如何透過 PETWorks-framework 框架進行去識別化。
 
-在以下程式碼中，我們透過 API ``PETAnonymization(originalData, tech, dataHierarchy, attributeTypes, maxSuppressionRate, t)``，以上述資料、“t-closeness” 字串、屬性型態定義、最大抑制處理比率 ``maxSuppressionRate`` 、以及 t 作爲參數，進行去識別化。
+在以下程式碼中，我們透過 API ``PETAnonymization(originalData, tech, dataHierarchy, attributeTypes, maxSuppressionRate, t)``，以上述資料、“t-closeness” 字串、屬性型態定義、最大抑制處理比率 ``maxSuppressionRate`` 、以及目標 t 值作爲參數，進行去識別化。
 
 再來，我們透過 API ``report(result, path)``，以上述評估結果與輸出檔案位置 ``path`` 作爲參數，輸出去識別化結果。
 
@@ -102,14 +102,13 @@ t-相似性（t-closeness）是一種隱私保護力指標，表示資料集中�
 去識別化之計算
 ---------------------------
 
-本專案之 t-相似性去識別化功能為串接知名開源工具 ARX 之 Flash 演算法執行，簡述流程如下：
+本專案之 t-相似性去識別化 API，為串接開源工具 ARX 之去識別化演算法進行。該演算法的處理流程可簡述如下：
 
-1. 依據使用者參數設定，定義個體背景資訊、敏感資訊等屬性型態。
-2. 從去識別化網格各節點通往最高節點的路徑中，找尋滿足 t 值設定、且評分最低的節點。
-3. 比較步驟 2. 找尋之節點，選擇評分最低的一個。
-4. 依據步驟 3. 選擇之節點，輸出去識別化結果。
+1. 參考個體背景資訊定義與屬性型態定義，列舉並排序所有可能的去識別化處理強度組合。
+2. 利用二分搜尋法，找出滿足 t 值設定，且去識別化處理強度最弱的組合。
+3. 依據步驟 2. 的組合進行去識別化，輸出去識別化結果。
 
-詳細請參閱 `此處 <https://hackmd.io/_m52ikVaS1GujvowVEmPFA>`_ 。
+詳細處理流程請參閱 ARX 官方提供之 `去識別化演算法說明文件 <https://arx.deidentifier.org/development/algorithms/>`_ 。
 
 
 
