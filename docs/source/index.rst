@@ -18,3 +18,7 @@ PETWorks-framework Documentation
    dpresence
    ldiversity
    tcloseness
+   kanonymity_de-identify
+   ldiversity_de-identify
+   tcloseness_de-identify
+   dpresence_de-identify
