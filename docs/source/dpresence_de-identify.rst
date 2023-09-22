@@ -3,7 +3,7 @@
 +++++++++++++++++++++++++++++++++++++++
 
 
-以下程式碼旨在對資料進行去識別化以滿足  :math:`\delta`-存在性（:math:`\delta`-presence）。更多 :math:`\delta`-存在性之說明，詳見 `此處 <#δ-存在性之定義>`_ 。
+以下程式碼旨在對資料進行去識別化以滿足  :math:`\delta`-存在性（:math:`\delta`-presence）。更多 :math:`\delta`-存在性之說明，詳見 `此處 <#id5>`_ 。
 
 我們以 ``data/adult.csv`` 作爲原始資料，``data/adult_hierarchy`` 目錄作爲資料階層定義，以及 ``attributeTypes`` 作為屬性型態定義，``data/adult10.csv`` 作為原始資料子集，展示如何透過 PETWorks-framework 框架進行去識別化。
 
