@@ -80,9 +80,9 @@
 | ...    | ... | ...  | ...            | ...       | ...            | ...              | ...        | ...          |
 +--------+-----+------+----------------+-----------+----------------+------------------+------------+--------------+
 
-以去識別化資料（output.csv）為輸入，使用 :math:`\delta`-存在性再識別工具，進行 dMin = 0.0 與 dMax = 0.7 之 :math:`\delta`-存在性檢測，得到如下結果。結果中，“dMin” 為設定之 dMin 值，“dMax” 為設定之 dMax 值，"d-presence"表示是否有滿足設定，下方結果為 true，表示滿足 dMin = 0.0 與 dMax = 0.7 之 :math:`\delta`-存在性。
+以去識別化資料（output.csv）為輸入，使用 :math:`\delta`-存在性再識別工具，進行 :math:`\delta_{\min}` = 0.0 與 :math:`\delta_{\max}` = 0.7 之 :math:`\delta`-存在性檢測，得到如下結果。結果中，“dMin” 為設定之 :math:`\delta_{\min}` 值，“dMax” 為設定之 :math:`\delta_{\max}` 值，"d-presence"表示是否有滿足設定，下方結果為 true，表示滿足 :math:`\delta_{\min}` = 0.0 與 :math:`\delta_{\max}` = 0.7 之 :math:`\delta`-存在性。
 
-以本專案開發之 `δ-匿名性再識別化工具 <https://petworks-doc.readthedocs.io/en/latest/dpresence.html>`_ 進行檢測，可確認去識別化結果已滿足 dMin = 0.0 與 dMax = 0.7 之 :math:`\delta`-存在性。
+以本專案開發之 `δ-匿名性再識別化工具 <https://petworks-doc.readthedocs.io/en/latest/dpresence.html>`_ 進行檢測，可確認去識別化結果已滿足 :math:`\delta_{\min}` = 0.0 與 :math:`\delta_{\max}` = 0.7 之 :math:`\delta`-存在性。
 
 .. code-block:: json
                                                                                                   
