@@ -8,7 +8,7 @@ t-相似性去識別化
 
 在以下程式碼中，我們透過 API ``PETAnonymization(originalData, tech, dataHierarchy, attributeTypes, maxSuppressionRate, t)``，以上述資料、“t-closeness” 字串、屬性型態定義、最大抑制處理比率 ``maxSuppressionRate`` 、以及目標 t 值作爲參數，進行去識別化。
 
-再來，我們透過 API ``report(result, path)``，以上述評估結果與輸出檔案位置 ``path`` 作爲參數，輸出去識別化結果。
+再來，我們透過 API ``report(result, path)``，以上述結果與輸出檔案位置 ``path`` 作爲參數，輸出去識別化結果。
 
 範例程式碼: t-closeness.py
 ---------------------------
