@@ -11,7 +11,7 @@ l-多樣性去識別化
 
 再來，我們透過 API ``report(result, path)``，以上述評估結果與輸出檔案位置 ``path`` 作爲參數，輸出去識別化結果。
 
-範例程式碼: $l$-diversity.py
+範例程式碼: l-diversity.py
 ---------------------------
 
 .. code-block:: python
