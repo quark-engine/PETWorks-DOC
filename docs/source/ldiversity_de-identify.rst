@@ -78,7 +78,7 @@ l-多樣性去識別化
 +--------+-----+------+----------------+-----------+----------------+------------------+------------+--------------+
 
 
-以本專案開發之 `$l$-多樣性再識別化工具 <https://petworks-doc.readthedocs.io/en/latest/ldiversity.html>`_ 進行檢測，可確認去識別化結果已滿足 $l = 6$ 之 $l$-多樣性。
+以本專案開發之 `l-多樣性再識別化工具 <https://petworks-doc.readthedocs.io/en/latest/ldiversity.html>`_ 進行檢測，可確認去識別化結果已滿足 $l = 6$ 之 $l$-多樣性。
 
 .. code-block:: json
 
