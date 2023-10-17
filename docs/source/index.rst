@@ -15,7 +15,11 @@ PETWorks-framework Documentation
    nonuniformentropy
    aecs
    kanonymity
-   dpresence
    ldiversity
+   dpresence
    tcloseness
    profitability
+   kanonymity_de-identify
+   ldiversity_de-identify
+   dpresence_de-identify
+   tcloseness_de-identify
