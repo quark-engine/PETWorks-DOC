@@ -1,17 +1,16 @@
 +++++++++++++++++++++++++++++++++++++++
-δ-存在性去識別化 API
+De-identification for d-presence
 +++++++++++++++++++++++++++++++++++++++
 
+The following code snippet de-identify the data to satisfy :math:`\delta`-presence [1]_.
 
-以下程式碼旨在對資料進行去識別化以滿足  :math:`\delta`-存在性（:math:`\delta`-presence）。更多 :math:`\delta`-存在性之說明，詳見 `此處 <#id5>`_ 。
+We use ``data/adult.csv`` as the original data, ``data/adult_hierarchy`` as the data hierarchy, and ``attributeTypes`` as the attribute type definitions, and ``data/adult10.csv`` as the subset to demonstrate how to perform de-identification through PETWorks-framework.
 
-我們以 ``data/adult.csv`` 作爲原始資料，``data/adult_hierarchy`` 目錄作爲資料階層定義，以及 ``attributeTypes`` 作為屬性型態定義，``data/adult10.csv`` 作為原始資料子集，展示如何透過 PETWorks-framework 框架進行去識別化。
+In the following code snippet, we use the API ``PETAnonymization(originalData, tech, dataHierarchy, attributeTypes, maxSuppressionRate, dMin, dMax, subsetData)`` with the data, the string “d-presence", the attribute type definitions, the maximal suppression rate, the target dMin and dMax, and the subset ``subsetData`` as the parameters to perform de-identification for d-presence.
 
-在以下程式碼中，我們透過 API ``PETAnonymization(originalData, tech, dataHierarchy, attributeTypes, maxSuppressionRate, dMin, dMax, subsetData)``，以上述資料、“d-presence” 字串、屬性型態定義、最大抑制處理比率 ``maxSuppressionRate`` 、以及目標 dMin、目標 dMax、原始資料子集 ``subsetData`` 作爲參數，進行去識別化。
+Then, we use the API ``report(result, path)`` with the result and the string "path" as parameters to write the result to the path.
 
-再來，我們透過 API ``report(result, path)``，以上述評估結果與輸出檔案位置 ``path`` 作爲參數，輸出去識別化結果。 
-
-範例程式碼: d-presence.py
+Example: d-presence.py
 ---------------------------
                                                                                                   
 .. code-block:: python
@@ -42,7 +41,7 @@
   
   output(result, "output.csv")
 
-輸出結果
+Execution Result
 ---------------------------
 
 
@@ -89,27 +88,7 @@
       "dMax": 0.7,
       "d-presence": true
   }
-                                                                                                  
-δ-存在性之定義
----------------------------
-:math:`\delta`-存在性（:math:`\delta`-presence）是一種隱私保護力指標，表示攻擊者利用個體的背景資訊，成功辨識個體存在於去識別化資料表的機率，是否介於指定數值範圍 :math:`\delta_{\min}` 到 :math:`\delta_{\max}` 之間，該機率稱 :math:`\delta` 值。一旦攻擊者辨識出個體 存在 或 不存在 於去識別化資料表，可藉由去識別化資料表推敲出個體敏感資訊。
 
-:math:`\delta` 值數值分佈在 0 到 1 之間。當數值越高或越低，攻擊者越容易判斷個體 存在 或 不存在 於去識別化資料表；當數值越接近中間值 0.5，攻擊者越難判斷個體是否存在於去識別化資料表。
-
-因此，指標使用 :math:`\delta_{\min}` 與 :math:`\delta_{\max}` 兩可調配參數限制  :math:`\delta` 值數值範圍。當 :math:`\delta_{\min}` 越大、:math:`\delta_{\max}` 越小，:math:`\delta` 值越接近中間值，此時個體之敏感資訊獲得最大保障。
-
-
-去識別化之計算
----------------------------
-本專案之 :math:`\delta`-存在性去識別化 API，為串接開源工具 ARX 之去識別化演算法進行。該演算法的處理流程可簡述如下：
-
-1. 參考個體背景資訊定義與屬性型態定義，列舉並排序所有可能的去識別化處理強度組合。
-2. 利用二分搜尋法，找出滿足 :math:`\delta_{\min}` 與 :math:`\delta_{\max}` 值設定，且去識別化處理強度最弱的組合。
-3. 依據步驟 2. 的組合進行去識別化，輸出去識別化結果。
-
-
-詳細處理流程請參閱 ARX 官方提供之 `去識別化演算法說明文件 <https://arx.deidentifier.org/development/algorithms/>`_ 。
-
-
-
-
+Reference
+---------
+.. [1] M. E. Nergiz, M. Atzori, and C. Clifton, “Hiding the presence of individuals from shared databases,” Proceedings of the 2007 ACM SIGMOD international conference on Management of data, 2007. 

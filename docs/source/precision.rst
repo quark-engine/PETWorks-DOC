@@ -1,17 +1,16 @@
 +++++++++++++++++++++++++++++++++++++++
-資料精準度評估指標
+Precision
 +++++++++++++++++++++++++++++++++++++++
 
-以下程式碼旨在評估經去識別化處理後的表格資料之精準度（Precision）。更多有關精準度之說明，詳見 `此處 <#id4>`_。
+The following code snippet evaluate the precision [1]_.
 
-我們以 ``data/adult.csv`` 作爲未處理之原始資料、 ``data/adult_anonymized.csv`` 作爲經去識別化處理之結果資料、 ``data/adult_hierarchy`` 目錄作爲資料儲存格定義，展示如何透過 PETWorks-framework 框架計算此指標。
+We use ``data/adult.csv`` as the original data, ``data/adult_anonymized.csv`` as the anonymized data, and ``data/adult_hierarchy`` as the data hierarchy to demonstrate how to evaluate this indicator through PETWorks-framework.
 
-在以下程式碼中，我們透過 API ``PETValidation(original, anonymized, tech, dataHierarchy)``，以上述資料與 “Precision” 字串作爲參數，計算資料之模糊度。
+In the following code snippet, we use the API ``PETValidation(original, anonymized, tech, dataHierarchy)`` with the data and the string “Precision” as the parameters to evaluate the precision.
 
-再來，我們透過 API ``report(result, format)``，以上述評估結果與 “json” 字串作爲參數，將評估結果以 JSON 格式印出。
+Then, we use the API ``report(result, format)`` with the evaluation result and the string "json" as parameters to print the evaluation result in JSON format.
 
-
-範例程式碼: precision.py
+Example: precision.py
 ------------------------
 
 .. code-block:: python
@@ -27,8 +26,8 @@
     )
     report(result, "json")
 
-輸出結果
---------
+Execution Result
+------------------
 
 .. code-block:: bash
 
@@ -37,117 +36,7 @@
         "precision": 0.7271401100722763
     }
 
-
-評估指標之定義
---------------
-
-精準度（Precision）是一種指標，用來表示資料經過概化處理（Generalization）後，描述原始資料的精確程度。其中概化處理是一種去識別化方法，是將資料替換成較廣義、籠統的值，例如將出生年 「1977」替換成「197*」。
-
-而精準度的數值介於 0 與 1 之間，數值越大，經概化處理後的資料與原始資料越相近。
-
-舉例來說，一份未經概化處理的資料，與自己相比其精準度為 1。而一份紀錄姓名「王小明」的原始資料，經概化處理成紀錄「王〇明」之資料，相較於紀錄「王〇〇」之資料，前者精準度較高。
-
-
-評估指標之計算
---------------
-
-參考 [1]_ ，計算精準度的方法有三個步驟：
-
-1. 計算資料表中每個儲存格，相較於原始資料表的失真程度。
-2. 計算所有儲存格失真程度之平均，取得資料表的整體失真程度。
-3. 以 1 減去資料表的整體失真程度，得之。
-
-接下來將以下列「原始資料表」與「概化資料表」，說明計算過程。
-
-**原始資料表**
-
-+-----------+-----------+
-| 出生地    |  出生年   |
-+===========+===========+
-| Germany   | 1970      |
-+-----------+-----------+
-| France    | 1977      |
-+-----------+-----------+
-| France    | 1983      |
-+-----------+-----------+
-| France    | 1988      |
-+-----------+-----------+
-
-**概化資料表**
-
-+-----------+-----------+
-| 出生地    |  出生年   |
-+===========+===========+
-| Europe    | 197*      |
-+-----------+-----------+
-| Europe    | 197*      |
-+-----------+-----------+
-| Europe    | 198*      |
-+-----------+-----------+
-| Europe    | 198*      |
-+-----------+-----------+
-
-
-假設「原始資料表」之儲存格，各自可經過概化處理的次數與資料變化如下：
-
-1. **「出生地」儲存格** 最多可經過 **\二次** 概化處理，第一次概化處理將 Germany、France 兩種資料替換成 Europe，第二次概化處理將 Europe 資料替換成 * 。
-2. **「出生年」儲存格** 最多可經過 **\三次** 概化處理，第一次概化處理將 1970、1977、1983、1988 四種資料替換成 197*、198*，第二次概化處理將 197*、198* 兩種資料替換成 19**，第三次概化處理將 19** 資料替換成 * 。
-
-那麼「原始資料表」之儲存格，經過以下概化處理可得到「概化資料表」：
-
-1. **「出生地」儲存格** 經過 **\一次** 概化處理，將 Germany、France 兩種資料替換成 Europe。
-2. **「出生年」儲存格** 經過 **\一次** 概化處理，將 1970、1977、1983、1988 四種資料替換成 197*、198*。
-
-透過以上假設，我們掌握評估精準度的必要資訊。接下來，將依步驟計算此指標。
-
-首先，欲評估「概化資料表」之精準度，需先計算每個儲存格的失真程度，公式如下：
-
-.. math:: 
-    失真程度 = \frac{儲存格經過概化處理的次數}{儲存格可經過概化處理的最大次數}
-
-以 **「出生地」儲存格** 爲例，其最多可經過 **\二次**\  概化處理 ，而在「概化資料表」中僅經過 **\一次** ，因此儲存格失真程度爲 1/2。
-
-.. math:: 
-    「出生地」儲存格之失真程度 =  \frac{「出生地」儲存格經過概化處理的次數}{「出生地」儲存格可經過概化處理的最大次數} = \frac{1}{2}
-
-以 **「出生年」儲存格** 爲例，其最多可經過 **\三次**\  概化處理，而在「概化資料表」中僅經過 **\一次** ，因此儲存格失真程度爲 1/3。
-
-.. math:: 
-    「出生年」儲存格之失真程度=   \frac{「出生年」儲存格經過概化處理的次數}{「出生年」儲存格可經過概化處理的最大次數} =\frac{1}{3} 
-
-再來，計算所有儲存格失真程度之平均，取得資料表的整體失真程度：
-
-.. math:: 
-    
-     整體失真程度
-     = 所有儲存格失真程度之平均 = \frac{所有儲存格失真程度之總和}{所有儲存格總數} 
-    
-
-以 **「概化資料表」** 為例，共有 4 個「出生地」儲存格與 4 個「出生年」儲存格，因此「概化資料表」的整體失真程度為 5/12。
-
-.. math:: 
-    
-    \begin{equation}
-    \begin{aligned}
-    「概化資料表」之整體失真程度 &= \cfrac{「出生地」儲存格失真程度之總和 +「出生年」儲存格失真程度之總和}{「出生地」儲存格數量 + 「出生年」儲存格數量} \\
-    &= \cfrac{{ (\frac{1}{2}+\frac{1}{2}+\frac{1}{2}+\frac{1}{2}) + (\frac{1}{3}+\frac{1}{3}+\frac{1}{3}+\frac{1}{3})}}{4+4} = \frac{5}{12}
-    \end{aligned}
-    \end{equation}
-    
-
-最後，以 1 減去資料表的整體失真程度來算出精準度。在此例中，「概化資料表」之精準度即：
-
-.. math:: 
-    
-    \begin{equation}
-    \begin{aligned}
-     精準度  = 1- 「概化資料表」之整體失真程度 ＝ 1- \frac{5}{12} \approx 0.58
-    \end{aligned}
-    \end{equation}
-
-
-
-參考資料
---------
+Reference
+-----------
 
 .. [1] L. SWEENEY, “ACHIEVING k-ANONYMITY PRIVACY PROTECTION USING GENERALIZATION AND SUPPRESSION.” International Journal of Uncertainty, Fuzziness and Knowledge-Based Systems, vol. 10, no. 5, pp. 571-588, 2002, doi: 10.1142/s021848850200165x.

@@ -1,16 +1,16 @@
 +++++++++++++++++++++++++++++++++++++++
-資料模糊度評估指標
+Ambiguity
 +++++++++++++++++++++++++++++++++++++++
 
-以下程式碼旨在評估經去識別化處理後的表格資料之模糊度（Ambiguity）。更多有關模糊度之說明，詳見 `此處 <#id4>`_。
+The following code snippet evaluate the ambiguity of the data [1]_ .
 
-我們以 ``data/adult.csv`` 作爲未處理之原始資料、 ``data/adult_anonymized.csv`` 作爲經去識別化處理之結果資料、 ``data/adult_hierarchy`` 目錄作爲資料欄位定義，展示如何透過 PETWorks-framework 框架計算此指標。
+We use ``data/adult.csv`` as the original data, ``data/adult_anonymized.csv`` as the anonymized data, and ``data/adult_hierarchy`` as the data hierarchy to demonstrate how to evaluate this indicator through PETWorks-framework.
 
-在以下程式碼中，我們透過 API ``PETValidation(original, anonymized, tech, dataHierarchy)``，以上述資料與 "Ambiguity" 字串作爲參數，計算資料之模糊度。
+In the following code snippet, we use the API ``PETValidation(original, anonymized, tech, dataHierarchy)`` with the data and the string "Ambiguity" as parameters to evaluate the ambiguity.
 
-再來，我們透過 API ``report(result, format)``，以上述評估結果與 "json" 字串作爲參數，將評估結果以 JSON 格式印出。
+Then, we use the API ``report(result, format)`` with the evaluation result and the string "json" as parameters to print the evaluation result in JSON format.
 
-範例程式碼: ambiguity.py
+Example: ambiguity.py
 ------------------------
 
 .. code-block:: python
@@ -27,8 +27,8 @@
     report(result, "json")
 
 
-輸出結果
---------
+Execution Result
+------------------
 
 .. code-block:: bash
 
@@ -37,84 +37,7 @@
         "ambiguity": 0.7271401100722763
     }
 
-
-評估指標之定義
---------------
-
-模糊度（Ambiguity）是一種指標，表示一份資料經去識別化處理後，相較於原始資料之模糊程度 [1]_。其數值恆正，介在 0 到正無限大之間，數值越大表示資料越模糊。
-
-舉例來說，一份未經過去識別化處理的原始資料，相較於自己的模糊度爲 0 ；一份記錄「出生年代」的資料表，相較於記錄「出生年」的資料表，前者模糊度較高。
-
-評估指標之計算
---------------
-
-參考 [2]_ ，計算模糊度的方法爲兩步驟：
-
-1. 取資料表中的每一個資料列，經過值域分析，反推所有可能爲原始資料列之資料組合。
-
-2. 加總所有資料列之資料組合數，計算平均得之。
-  
-接下來將以下列「去識別化資料表」與「原始資料表」，說明計算過程。
-
-**去識別化資料表**
-
-+-----+-----------------+
-| 編號|  出生年代       |
-+=====+=================+
-| 1   | 1970 - 1979     |
-+-----+-----------------+
-| 2   | 1980 - 1989     |
-+-----+-----------------+
-
-**原始資料表**
-
-+-----+-----------+
-| 編號|  出生年代 |
-+=====+===========+
-| 1   | 1977      |
-+-----+-----------+
-| 2   | 1988      |
-+-----+-----------+
-
-首先，需計算「去識別化資料表」中的每一個資料列，所有可能爲原始資料列之資料組合。
-
-**編號 1 資料列** 經過值域分析，欄位「出生年代」可反推回原始資料表之欄位「出生年」，其原始數值共有 10 種可能，如下所示。因此，所有可能爲原始資料列之資料組合數爲 10。
-
-+----------------------------+--------+--------+
-| 可能爲原始資料列之資料組合 |  編號  | 出生年 |
-+============================+========+========+
-| #1                         |  1     | 1970   |
-+----------------------------+--------+--------+
-| #2                         |  1     | 1971   |
-+----------------------------+--------+--------+
-| ...                        |  ...   | ...    |
-+----------------------------+--------+--------+
-| #10                        |  1     | 1979   |
-+----------------------------+--------+--------+
-
-**編號 2 資料列** 經過值域分析，欄位「出生年代」也可反推回原始資料表之欄位「出生年」，其原始數值也有 10 種可能，如下所示。因此，所有可能爲原始資料之資料組合數亦爲 10。
-
-+----------------------------+--------+---------+
-| 可能爲原始資料列之資料組合 |  編號  | 出生年  |
-+============================+========+=========+
-| #1                         | 2      | 1980    |
-+----------------------------+--------+---------+
-| #2                         | 2      | 1981    |
-+----------------------------+--------+---------+
-| ...                        | ...    | ...     |
-+----------------------------+--------+---------+
-| #10                        | 2      | 1989    |
-+----------------------------+--------+---------+
-
-最後，加總所有資料列之資料組合數以算出模糊度。在此例中，「去識別化資料表」模糊度如下：
-
-.. math::
-
-    模糊度 = \frac{編號 1 資料列之組合數 + 編號 2 資料列之組合數}{資料列總數} = \frac{10 + 10}{2}=10
-
-
-參考資料
---------
+Reference
+-----------
 
 .. [1] J. Goldberger and T. Tassa, “Efficient Anonymizations with Enhanced Utility,” in 2009 IEEE International Conference on Data Mining Workshops, Miami, FL, USA, Dec. 2009, pp. 106–113. doi: 10.1109/ICDMW.2009.15.
-.. [2] M. E. Nergiz and C. Clifton, “Thoughts on k-anonymization,” Data & Knowledge Engineering, vol. 63, no. 3, pp. 622–645, Dec. 2007, doi: 10.1016/j.datak.2007.03.009.

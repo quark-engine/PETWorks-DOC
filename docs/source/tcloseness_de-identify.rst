@@ -1,16 +1,16 @@
 +++++++++++++++++++++++++++++++++++++++
-t-相似性去識別化 API
+De-identification for t-closeness
 +++++++++++++++++++++++++++++++++++++++
 
-以下程式碼旨在對資料進行去識別化以滿足 t-相似性（t-closeness）。更多 t-相似性之說明，詳見 `此處 <#id4>`_ 。
+The following code snippet de-identify the data to satisfy t-closeness [1]_.
 
-我們以 ``data/adult.csv`` 作爲原始資料，``data/adult_hierarchy`` 目錄作爲資料階層定義，以及 ``attributeTypes`` 作為屬性型態定義，展示如何透過 PETWorks-framework 框架進行去識別化。
+We use ``data/adult.csv`` as the original data, ``data/adult_hierarchy`` as the data hierarchy, and ``attributeTypes`` as the attribute type definitions to demonstrate how to perform de-identification through PETWorks-framework.
 
-在以下程式碼中，我們透過 API ``PETAnonymization(originalData, tech, dataHierarchy, attributeTypes, maxSuppressionRate, t)``，以上述資料、“t-closeness” 字串、屬性型態定義、最大抑制處理比率 ``maxSuppressionRate`` 、以及目標 t 值作爲參數，進行去識別化。
+In the following code snippet, we use the API ``PETAnonymization(originalData, tech, dataHierarchy, attributeTypes, maxSuppressionRate, t)`` with the data, the string “t-closeness,” the attribute type definitions, the maximal suppression rate, and the target t value as the parameters to perform de-identification for t-closeness.
 
-再來，我們透過 API ``report(result, path)``，以上述結果與輸出檔案位置 ``path`` 作爲參數，輸出去識別化結果。
+Then, we use the API ``report(result, path)`` with the result and the string "path" as parameters to write the result to the path.
 
-範例程式碼: t-closeness.py
+Example: t-closeness.py
 ---------------------------
 
 .. code-block:: python
@@ -42,7 +42,7 @@ t-相似性去識別化 API
 
 
 
-輸出結果
+Execution Result
 ---------------------------
 
 上述程式碼將輸出滿足 t = 0.2 之 t-相似性去識別化結果至 `output.csv`。檔案內容節錄如下：
@@ -88,27 +88,6 @@ t-相似性去識別化 API
       "fulfill t-closeness": true
   }
 
-
-
-t-相似性之定義
----------------------------
-
-t-相似性（t-closeness）是一種隱私保護力指標，表示資料集中子群體的敏感資訊機率分佈與資料表整體的敏感資訊機率分佈之差異，是否不超過 t，該差異稱為推土機距離（Earth Mover’s distance）。一旦攻擊者發現子群體的敏感資訊機率分佈與整體資料表差異過大，可藉由資料表推敲出子群體的敏感資訊特徵。
-
-推土機距離數值分佈在 0 到 1 之間。當數值越高，子群體的敏感資訊機率分佈與整體的敏感資訊機率分佈越迥異，攻擊者可分析出的特徵越多；當數值越低，子群體的敏感資訊機率分佈與整體的敏感資訊機率分佈越相似，攻擊者可分析出的特徵越少。
-
-因此，指標使用可調配參數 t 限制推土機距離最大值。當參數 t 越小，子群體的敏感資訊機率分佈與整體的敏感資訊分佈被限制的越相似，攻擊者可分析出的特徵越少，敏感資訊得到的保障越大。
-
-去識別化之計算
----------------------------
-
-本專案之 t-相似性去識別化 API，為串接開源工具 ARX 之去識別化演算法進行。該演算法的處理流程可簡述如下：
-
-1. 參考個體背景資訊定義與屬性型態定義，列舉並排序所有可能的去識別化處理強度組合。
-2. 利用二分搜尋法，找出滿足 t 值設定，且去識別化處理強度最弱的組合。
-3. 依據步驟 2. 的組合進行去識別化，輸出去識別化結果。
-
-詳細處理流程請參閱 ARX 官方提供之 `去識別化演算法說明文件 <https://arx.deidentifier.org/development/algorithms/>`_ 。
-
-
-
+Reference
+---------
+.. [1] N. Li, T. Li and S. Venkatasubramanian, “t-Closeness: Privacy Beyond k-Anonymity and l-Diversity,” 2007 IEEE 23rd International Conference on Data Engineering, Istanbul, Turkey, 2007, pp. 106-115, doi: 10.1109/ICDE.2007.367856.
