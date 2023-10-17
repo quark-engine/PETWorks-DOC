@@ -7,7 +7,7 @@ l-多樣性去識別化 API
 
 我們以 ``data/adult.csv`` 作爲原始資料，``data/adult_hierarchy`` 目錄作爲資料階層定義，以及 ``attributeTypes`` 作為屬性型態定義，展示如何透過 PETWorks-framework 框架進行去識別化。
 
-在以下程式碼中，我們透過 API ``PETAnonymization(originalData, tech, dataHierarchy, attributeTypes, maxSuppressionRate, l)``，以上述資料、“l-diversity” 字串、屬性型態定義、最大抑制處理比率 ``maxSuppressionRate`` 、以及目標 $l$ 值作爲參數，進行去識別化。
+在以下程式碼中，我們透過 API ``PETAnonymization(originalData, tech, dataHierarchy, attributeTypes, maxSuppressionRate, l)``，以上述資料、“l-diversity” 字串、屬性型態定義、最大抑制處理比率 ``maxSuppressionRate`` 、以及目標 l 值作爲參數，進行去識別化。
 
 再來，我們透過 API ``report(result, path)``，以上述評估結果與輸出檔案位置 ``path`` 作爲參數，輸出去識別化結果。
 
